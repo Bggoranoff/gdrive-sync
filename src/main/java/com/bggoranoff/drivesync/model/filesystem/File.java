@@ -70,6 +70,7 @@ public class File implements FileSystemEntity {
         return this.file.lastModified();
     }
 
+    @Override
     public java.io.File getContainedFile() {
         return file;
     }
