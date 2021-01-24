@@ -14,4 +14,6 @@ public interface FileSystemEntity {
     void move(String destination, boolean copy) throws IOException;
 
     long getLastTimeModified();
+
+    java.io.File getContainedFile();
 }
