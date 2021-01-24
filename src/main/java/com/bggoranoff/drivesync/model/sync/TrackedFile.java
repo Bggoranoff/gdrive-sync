@@ -22,9 +22,11 @@ public class TrackedFile extends TrackedEntityImpl {
         fileMetadata.setParents(Collections.singletonList(parentId));
         fileMetadata.setModifiedTime(new DateTime(this.localFile.getLastTimeModified()));
         FileContent mediaContent = new FileContent(null, this.localFile.getContainedFile());
-        this.driveService.files().create(fileMetadata, mediaContent)
+        String currentId = this.driveService.files().create(fileMetadata, mediaContent)
                 .setFields("id")
-                .execute();
+                .execute()
+                .getId();
+        this.setFileId(currentId);
     }
 
     @Override
