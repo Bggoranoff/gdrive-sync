@@ -67,7 +67,7 @@ public class TrackedDirectory extends TrackedEntityImpl {
 
     public List<File> listFiles() throws IOException {
         return driveService.files().list()
-                .setQ(String.format("'%s' in parents and mimeType != 'application/vnd.google-apps.folder' and trashed = false", this.getFileId()))
+                .setQ(String.format("'%s' in parents and mimeType != 'application/vnd.google-apps.file' and trashed = false", this.getFileId()))
                 .setSpaces("drive")
                 .setFields("nextPageToken, files(id, name, parents, modifiedTime)")
                 .execute()

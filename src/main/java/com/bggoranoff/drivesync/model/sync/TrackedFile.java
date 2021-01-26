@@ -23,7 +23,7 @@ public class TrackedFile extends TrackedEntityImpl {
         File fileMetadata = new File();
         fileMetadata.setName(this.localFile.getContainedFile().getName());
         fileMetadata.setParents(Collections.singletonList(parentId));
-        fileMetadata.setModifiedTime(new DateTime(this.localFile.getLastTimeModified()));
+        fileMetadata.setCreatedTime(new DateTime(this.localFile.getLastTimeModified()));
         FileContent mediaContent = new FileContent(null, this.localFile.getContainedFile());
         String currentId = this.driveService.files().create(fileMetadata, mediaContent)
                 .setFields("id")
