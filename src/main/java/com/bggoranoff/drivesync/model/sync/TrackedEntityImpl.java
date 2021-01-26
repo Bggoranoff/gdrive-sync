@@ -23,6 +23,7 @@ public abstract class TrackedEntityImpl implements TrackedEntity {
     public long getCreationTime() throws IOException, ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         File file = this.driveService.files().get(this.getFileId())
+                .setFields("createdTime")
                 .execute();
         dateFormat.setTimeZone(TimeZone.getTimeZone(TimeZone.getAvailableIDs(file.getCreatedTime().getTimeZoneShift())[0]));
         return dateFormat.parse(file.getCreatedTime().toString()).getTime();

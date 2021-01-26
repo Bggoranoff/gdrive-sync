@@ -13,10 +13,7 @@ import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.DriveScopes;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.security.GeneralSecurityException;
 import java.util.Collections;
 import java.util.List;
@@ -27,10 +24,7 @@ public class GDriveAuthService {
     private Drive driveService = null;
 
     private Credential retrieveCredentials(final NetHttpTransport HTTP_TRANSPORT, final String CREDENTIALS_PATH, final String TOKENS_PATH) throws IOException {
-        InputStream inputStream = GDriveAuthService.class.getResourceAsStream(CREDENTIALS_PATH);
-        if(inputStream == null) {
-            throw new FileNotFoundException("Resource not found: " + CREDENTIALS_PATH);
-        }
+        InputStream inputStream = new FileInputStream(CREDENTIALS_PATH);
         GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(inputStream));
         GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(HTTP_TRANSPORT, JSON_FACTORY, clientSecrets, SCOPES)
                 .setDataStoreFactory(new FileDataStoreFactory(new java.io.File(TOKENS_PATH)))
