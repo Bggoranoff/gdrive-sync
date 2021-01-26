@@ -39,7 +39,6 @@ public class GDriveSyncService {
         String currentId = getFileId(parentId, dirToSync.getContainedFile().getName());
         TrackedDirectory trackedDirToSync = new TrackedDirectory(this.getDriveAuthService().getDriveService(), this.rootDir.getContainedFile().getPath(), currentId);
         if(currentId == null) {
-            System.out.println("CREATING DIR IN DRIVE");
             trackedDirToSync.upload(parentId);
         }
         syncFolderWithCloud(trackedDirToSync);
@@ -61,7 +60,6 @@ public class GDriveSyncService {
                 String foundFolderId = this.getFileId(currentDirectory.getFileId(), child.getName());
                 TrackedDirectory trackedChildDir = new TrackedDirectory(this.getDriveAuthService().getDriveService(), child.getPath(), foundFolderId);
                 if(foundFolderId == null) {
-                    System.out.println("UPLOADING LOCAL DIR");
                     trackedChildDir.upload(currentDirectory.getFileId());
                     new java.io.File(trackedChildDir.getLocalFile().getContainedFile().getPath()).setLastModified(this.currentTimeSync);
                 }
@@ -70,16 +68,13 @@ public class GDriveSyncService {
                 String foundFileId = this.getFileId(currentDirectory.getFileId(), child.getName());
                 TrackedFile trackedChildFile = new TrackedFile(this.getDriveAuthService().getDriveService(), child.getPath(), foundFileId);
                 if(foundFileId == null) {
-                    System.out.println("UPLOADING LOCAL FILE");
                     trackedChildFile.upload(currentDirectory.getFileId());
                     new java.io.File(trackedChildFile.getLocalFile().getContainedFile().getPath()).setLastModified(this.currentTimeSync);
                 } else if(trackedChildFile.getLocalFile().getLastTimeModified() > trackedChildFile.getCreationTime()) {
-                    System.out.println("UPDATING CLOUD FILE");
                     trackedChildFile.delete();
                     trackedChildFile.upload(currentDirectory.getFileId());
                     new java.io.File(trackedChildFile.getLocalFile().getContainedFile().getPath()).setLastModified(this.currentTimeSync);
                 } else if(trackedChildFile.getLocalFile().getLastTimeModified() < trackedChildFile.getCreationTime()) {
-                    System.out.println("UPDATING LOCAL FILE");
                     String dest = trackedChildFile.getLocalFile().getContainedFile().getParent();
                     trackedChildFile.getLocalFile().delete();
                     trackedChildFile.read(dest);
@@ -94,7 +89,6 @@ public class GDriveSyncService {
         for(File file : filesList) {
             boolean existsLocally = false;
             trackedEntity.setFileId(file.getId());
-            System.out.println(file.getName());
             for(java.io.File localChild : localFiles) {
                 if(file.getName().equals(localChild.getName())) {
                     existsLocally = true;
@@ -103,11 +97,9 @@ public class GDriveSyncService {
             }
             if(!existsLocally) {
                 if(this.getLastTimeSynced() < trackedEntity.getCreationTime()) {
-                    System.out.println("DOWNLOADING FILE FROM CLOUD");
                     String dest = currentDirectory.getLocalFile().getContainedFile().getPath();
                     trackedEntity.read(dest);
                 } else {
-                    System.out.println("DELETING FILE FROM CLOUD");
                     trackedEntity.delete();
                 }
             }
