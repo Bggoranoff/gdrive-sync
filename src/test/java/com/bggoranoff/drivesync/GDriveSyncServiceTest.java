@@ -37,15 +37,19 @@ public class GDriveSyncServiceTest {
     @Test
     public void mockedSyncFolderWithCloudShouldHandleValidInput() throws IOException, ParseException {
         GDriveSyncService mockService = mock(GDriveSyncService.class);
-        doNothing().when(mockService).syncFolderWithCloud("/valid/file/path");
-        mockService.syncFolderWithCloud("/valid/file/path");
-        verify(mockService, times(1)).syncFolderWithCloud("/valid/file/path");
+        doNothing().when(mockService).setRootDir("/valid/root/path");
+        mockService.setRootDir("/valid/root/path");
+        doNothing().when(mockService).syncFolderWithCloud();
+        mockService.syncFolderWithCloud();
+        verify(mockService, times(1)).syncFolderWithCloud();
     }
 
     @Test(expected = IOException.class)
     public void mockedSyncFolderWithCloudShouldThrowIOExceptionOnInvalidFolder() throws IOException, ParseException {
         GDriveSyncService mockService = mock(GDriveSyncService.class);
-        doThrow(new IOException("Invalid folder path!")).when(mockService).syncFolderWithCloud("trash");
-        mockService.syncFolderWithCloud("trash");
+        doNothing().when(mockService).setRootDir("trash");
+        mockService.setRootDir("trash");
+        doThrow(new IOException("Invalid folder path!")).when(mockService).syncFolderWithCloud();
+        mockService.syncFolderWithCloud();
     }
 }

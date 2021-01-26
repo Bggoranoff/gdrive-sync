@@ -32,12 +32,12 @@ public class GDriveSyncService {
         this.lastTimeSynced = 0;
     }
 
-    public void syncFolderWithCloud(String folderPath) throws IOException, NullPointerException, ParseException {
+    public void syncFolderWithCloud() throws IOException, NullPointerException, ParseException {
         this.currentTimeSync = new Date().getTime();
         String parentId = "root";
-        Directory dirToSync = new Directory(folderPath);
+        Directory dirToSync = new Directory(this.rootDir.getContainedFile().getPath());
         String currentId = getFileId(parentId, dirToSync.getContainedFile().getName());
-        TrackedDirectory trackedDirToSync = new TrackedDirectory(this.getDriveAuthService().getDriveService(), folderPath, currentId);
+        TrackedDirectory trackedDirToSync = new TrackedDirectory(this.getDriveAuthService().getDriveService(), this.rootDir.getContainedFile().getPath(), currentId);
         if(currentId == null) {
             System.out.println("CREATING DIR IN DRIVE");
             trackedDirToSync.upload(parentId);
