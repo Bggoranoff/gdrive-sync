@@ -16,7 +16,7 @@ Add the following lines to your pom.xml file:
 <project>
     <dependencies>
         <dependency>
-            <groupId>com.bggoranoff.drivesync</groupId>
+            <groupId>com.github.bggoranoff</groupId>
             <artifactId>gdrive-sync</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
