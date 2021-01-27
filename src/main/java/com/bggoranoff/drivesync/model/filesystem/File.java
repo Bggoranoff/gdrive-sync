@@ -1,7 +1,5 @@
 package com.bggoranoff.drivesync.model.filesystem;
 
-import org.apache.commons.io.FilenameUtils;
-
 import java.io.*;
 import java.nio.file.FileAlreadyExistsException;
 

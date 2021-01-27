@@ -8,10 +8,7 @@ import com.google.api.services.drive.model.File;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Collections;
-import java.util.TimeZone;
 
 public class TrackedFile extends TrackedEntityImpl {
     public TrackedFile(Drive driveService, String filePath, String fileId) {

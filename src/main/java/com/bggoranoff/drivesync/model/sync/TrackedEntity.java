@@ -1,7 +1,5 @@
 package com.bggoranoff.drivesync.model.sync;
 
-import com.bggoranoff.drivesync.model.filesystem.FileSystemEntity;
-
 import java.io.IOException;
 
 public interface TrackedEntity {

@@ -2,7 +2,6 @@ package com.bggoranoff.drivesync.model.filesystem;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.FileAlreadyExistsException;
 
 public interface FileSystemEntity {
     void delete() throws FileNotFoundException;

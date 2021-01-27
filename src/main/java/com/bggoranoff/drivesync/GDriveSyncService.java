@@ -5,7 +5,6 @@ import com.bggoranoff.drivesync.model.filesystem.Directory;
 import com.bggoranoff.drivesync.model.sync.TrackedDirectory;
 import com.bggoranoff.drivesync.model.sync.TrackedEntityImpl;
 import com.bggoranoff.drivesync.model.sync.TrackedFile;
-import com.google.api.client.util.DateTime;
 import com.google.api.services.drive.model.File;
 
 import java.io.IOException;
