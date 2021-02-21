@@ -24,7 +24,7 @@ Add the following lines to your pom.xml file:
         <dependency>
             <groupId>com.github.bggoranoff</groupId>
             <artifactId>gdrive-sync</artifactId>
-            <version>1.0</version>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>
